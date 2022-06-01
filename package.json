@@ -1,0 +1,8 @@
+{
+  "name": "quiz_bootcamp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "lismanarsilo <lismanarsilo@gmail.com>",
+  "type": "module",
+  "license": "MIT"
+}
