@@ -64,13 +64,13 @@ group by d.department_id, d.department_name
 order by total_emps asc
 
 10.
-select e.employee_id,
-e.first_name,
-e.last_name,
-e.salary, 
+select employee_id,
+first_name,
+last_name,
+salary, 
 extract(year from age(now(),hire_date)) as masa_kerja, 
 CASE WHEN extract(year from age(now(),hire_date)) >= 25 THEN salary*5 ELSE salary*3 END AS bonus 
-from employees as e
+from employees
 
 11.
 select extract(year from age(now(),hire_date)) as masa_kerja, 
@@ -78,10 +78,46 @@ CASE WHEN extract(year from age(now(),hire_date)) >= 25 THEN salary*5 ELSE salar
 from employees
 order by masa_kerja asc
 
-
-12.
-
-
-select * from employees
-
+12. select 
+		sum(coalesce (b.pertama, 0))"15 <=masa kerja <=25",
+	 	sum(coalesce (b.kedua, 0))"25 <=masa kerja <=30",
+	 	sum(coalesce (b.ketiga, 0))"30 <=masa kerja <=35"
+			from
+				(select a.masa_kerja,
+				case when a.masa_kerja >= 15 and a.masa_kerja <= 25 then count (1) end pertama,
+				case when a.masa_kerja > 25 and a.masa_kerja <= 30 then count (1) end kedua,
+				case when a.masa_kerja > 30 and a.masa_kerja <= 35 then count (1) end ketiga
+			from
+				(select hire_date,
+				extract (year from age(now(),hire_date)) as masa_kerja
+			from employees)a group by a.masa_kerja)b
+	
+	13.
+	select b.department_id, b.department_name, 
+	 	sum(coalesce (b.pertama, 0))"15 <=masa kerja <=25",
+	 	sum(coalesce (b.kedua, 0))"25 <=masa kerja <=30",
+	 	sum(coalesce (b.ketiga, 0))"30 <=masa kerja <=35"
+		from
+			(select a.masa_kerja, a.department_name, a.department_id,
+			case when a.masa_kerja >= 15 and a.masa_kerja <= 25 then count (1) end pertama,
+			case when a.masa_kerja >25 and a.masa_kerja <= 30 then count (1) end kedua,
+			case when a.masa_kerja >30 and a.masa_kerja <= 35 then count (1) end ketiga
+		from 
+			(select employee_id, hire_date, i.department_id , i.department_name,
+			extract (year from age(now(),hire_date)) as masa_kerja
+		from employees h join departments i on h.department_id = i.department_id)a 
+				group by a.masa_kerja, a.department_name, a.department_id)b
+					group by b.department_id, b.department_name
+					order by b.department_name asc
+	
+-- 	show table
+	select * from regions
+	select * from countries
+	select * from locations
+	select * from departments
+	select * from employees
+	select * from jobs
+	select * from dependents
+	select * from project_assignment
+	select * from projects
 
