@@ -64,11 +64,24 @@ group by d.department_id, d.department_name
 order by total_emps asc
 
 10.
-select employees.employee_id,
-employees.first_name,
-employees.last_name,
-employees.salary, 
+select e.employee_id,
+e.first_name,
+e.last_name,
+e.salary, 
 extract(year from age(now(),hire_date)) as masa_kerja, 
 CASE WHEN extract(year from age(now(),hire_date)) >= 25 THEN salary*5 ELSE salary*3 END AS bonus 
-from employees 
+from employees as e
+
+11.
+select extract(year from age(now(),hire_date)) as masa_kerja, 
+CASE WHEN extract(year from age(now(),hire_date)) >= 25 THEN salary*5 ELSE salary*3 END AS bonus 
+from employees
+order by masa_kerja asc
+
+
+12.
+
+
+select * from employees
+
 
