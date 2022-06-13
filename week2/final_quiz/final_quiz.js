@@ -23,50 +23,50 @@
 // }
 // console.info(rotateArray(arr, 3));
 
-// // 3.
-// const array1 = [
-//   "Mangga",
-//   "Apel",
-//   "Melon",
-//   "Pisang",
-//   "Sirsak",
-//   "Tomat",
-//   "Nanas",
-//   "Nangka",
-//   "Timun",
-//   "Mangga",
-// ];
-// const array2 = [
-//   "Bayam",
-//   "Wortel",
-//   "Kangkung",
-//   "Mangga",
-//   "Tomat",
-//   "Kembang Kol",
-//   "Nangka",
-//   "Timun",
-// ];
+// 3.
+const array1 = [
+  "Mangga",
+  "Apel",
+  "Melon",
+  "Pisang",
+  "Sirsak",
+  "Tomat",
+  "Nanas",
+  "Nangka",
+  "Timun",
+  "Mangga",
+];
+const array2 = [
+  "Bayam",
+  "Wortel",
+  "Kangkung",
+  "Mangga",
+  "Tomat",
+  "Kembang Kol",
+  "Nangka",
+  "Timun",
+];
 
-// function membedakanArray(arr1, arr2) {
-//   let same = new Set();
-//   let hasil = "";
-//   for (let i = 0; i < arr1.length; i++) {
-//     for (let j = 0; j < arr2.length; j++) {
-//       if (arr1[i] == arr2[j]) {
-//         same.add(array1[i]);
-//       }
-//     }
-//   }
+function membedakanArray(arr1, arr2) {
+  let same = new Set();
+  let hasil = "";
+  for (let i = 0; i < arr1.length; i++) {
+    for (let j = 0; j < arr2.length; j++) {
+      if (arr1[i] == arr2[j]) {
+        same.add(array1[i]);
+      }
+    }
+  }
 
-//   let different = new Set(
-//     [...array1, ...array2].filter((value) => !same.has(value))
-//   );
-//   hasil += `
-//   Same = [ ${Array.from(same).join(", ")} ]
-//   Different = [ ${Array.from(different).join(", ")} ]`;
-//   return hasil;
-// }
-// console.info(membedakanArray(array1, array2));
+  let different = [
+    ...new Set([...array1, ...array2].filter((value) => !same.has(value))),
+  ];
+  hasil += `
+  Same = [ ${Array.from(same).join(", ")} ]
+  Different = [ ${different.join(", ")} ]`;
+  return hasil;
+}
+console.info(membedakanArray(array1, array2));
 
 // // 4.
 // function piramid2(start, end) {
