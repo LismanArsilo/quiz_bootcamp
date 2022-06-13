@@ -4,8 +4,10 @@
 // looping dengan for atau while-do.
 
 const penduduk = 30000;
-let jumlahTahun = 0;
-for (let i = penduduk; i <= 100000; i = i + 900) {
-  jumlahTahun += 1;
+for (let i = 1; i <= 100000; i++) {
+  penduduk += penduduk * 0.03;
+  console.log(i + "Tahun");
+  if (penduduk > 100000) {
+    break;
+  }
 }
-console.info(jumlahTahun);
